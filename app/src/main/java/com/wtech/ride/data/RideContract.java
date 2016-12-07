@@ -14,38 +14,30 @@ public class RideContract {
     public static final String CONTENT_AUTHORITY = "com.wtech.smartrider";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    public static final String PATH_PESSOA = "pessoa";
+    public static final String PATH_USUARIO = "usuario";
     public static final String PATH_CONDUTOR = "condutor";
     public static final String PATH_CARONA = "carona";
     public static final String PATH_VEICULO = "veiculo";
     public static final String PATH_PONTOVIRTUAL = "pontovirtual";
-    public static final String PATH_AVALIACAO = "avaliacao";
-    public static final String PATH_PASSAGEIROS_DE_CARONA = "passageiros de carona";
-    public static final String PATH_USUARIO_DE_PONTO_VIRTUAL = "usuario de ponto virtual";
-    public static final String PATH_PASSAGEIROS_PRE_APROVADOS = "passageiros pre aprovado";
 
 
-    public static final class PessoaEntry implements BaseColumns{
+    public static final class UsuarioEntry implements BaseColumns{
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_PESSOA).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_USUARIO).build();
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PESSOA;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USUARIO;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PESSOA;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USUARIO;
 
-        public static final String TABLE_NAME = "pessoa";
+        public static final String TABLE_NAME = "usuario";
 
-        public static final String COLUMN_PESSOA_NAME = "pessoa_name";
-        public static final String COLUMN_PESSOA_SOBRENOME = "pessoa_sobrenome";
-        public static final String COLUMN_PESSOA_USERNAME = "pessoa_username";
-        public static final String COLUMN_PESSOA_PASSWORD = "pessoa_password";
-        public static final String COLUMN_PESSOA_DATA_NASCIMENTO = "pessoa_nascimento";
-        public static final String COLUMN_SEXO = "pessoa_sexo";
-        public static final String COLUMN_ID_VEICULO = "pessoa_id_veiculo";
-        public static final String COLUMN_STATUS = "pessoa_status";
-        public static final String COLUMN_CNH = "pessoa_cnh";
+        public static final String COLUMN_USUARIO_NAME = "usuario_name";
+        public static final String COLUMN_USUARIO_SOBRENOME = "usuario_sobrenome";
+        public static final String COLUMN_USUARIO_USERNAME = "usuario_username";
+        public static final String COLUMN_USUARIO_PASSWORD = "usuario_password";
+        public static final String COLUMN_USUARIO_DATA_NASCIMENTO = "usuario_nascimento";
 
-        public static Uri buildPessoaUri(long id){
+        public static Uri buildUsuarioUri(long id){
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
@@ -67,7 +59,6 @@ public class RideContract {
         public static final String COLUMN_CARONA_ID_PONTOPARTIDA = "carona_idpartida";
         public static final String COLUMN_CARONA_ID_DESTINO = "carona_iddestino";
         public static final String COLUMN_CARONA_HORA_PARTIDA = "carona_hora_partida";
-        public static final String COLUMN_LISTA_DE_PASSAGEIROS = "carona_listaDePassageiros";
 
         public static Uri buildCaronaUri(long id){
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -126,29 +117,6 @@ public class RideContract {
         public static Uri buildPontoVirtualUri(long id){
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
-
-    }
-
-    public static final class UsuarioDePontoVirtaulEntry implements BaseColumns{
-        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_USUARIO_DE_PONTO_VIRTUAL).build();
-
-        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USUARIO_DE_PONTO_VIRTUAL;
-        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USUARIO_DE_PONTO_VIRTUAL;
-
-        public static final String TABLE_NAME = "usuario_de_ponto_virtual";
-
-        public static final String COLUMN_ID_USUARIO = "usuário_usuario_de_ponto_virtual";
-        public static final String COLUMN_ID_PONTO_VIRTUAL = "usuario_id_ponto_de_embarque";
-    }
-
-    public static final class PassageirosPreAprovadosEntry implements BaseColumns{
-        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_PASSAGEIROS_PRE_APROVADOS).build();
-
-        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PASSAGEIROS_PRE_APROVADOS;
-        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PASSAGEIROS_PRE_APROVADOS;
-
-        public static final String TABLE_NAME = "passageiros_pre_aprovados";
-
 
     }
 

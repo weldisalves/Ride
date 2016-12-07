@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_71c6234d08cffe366f78b77722b7c277cc2d31e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.1_31e46228b1115db9af56cf9e9f079c11d7e3fb3b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-24.2.1_a139751383d95e768ffed6dc8ef744fbce1458f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.1_b5100cef70037808e6da36414aba9405da4166d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.1_63a65e78b0113a14aec4e0b9c720760b672bb187.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.1_0227b768a328d2a29ba15e27f3754d26ef6e689b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.1_f6e3eb496408ca9887f2454d4be50486434b1f8f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.1_5fdcc2fcc8bae3a0f6133aeb421f1d268d18cabc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.1_afd0efa43002216069037b7afadabc9385c92e67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_04fbe136dd55d95d636ee9d46db68c8af6318c6d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_12fecbfdcffe8f8e11612d7326962a94640b780f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.1_8216bdf985e91a32dcf3e6cb53a65db80f37251f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="66d8148d81895bef08119fd12f27323d3a867a22">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_e2ddba0a3a7658d388490af53d1de6262d770994.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.2.1_881b13fd5b4dca06c08bfae77127a914bcf24605.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_c4cdca9114a7e6d0bcc2886d60e7743f428d9219.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.1_fdab4672d7c7ce26d9f95dbc62209cff5ddd137f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.1_8e5d5add9cdb3fa3fd17832ae11a3c9c344014ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b23671176609907db0458fc1c4127bc035399aea">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/instant-run_5023047b796d288d78f136e0de00a585817032f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/home/weldis/AndroidStudioProjects/Ride/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_e08256d77d539d11e968ee72a87f0936db3842a3.jar" />
+    </item>
+
+</items>

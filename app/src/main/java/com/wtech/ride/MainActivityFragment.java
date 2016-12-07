@@ -21,12 +21,22 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button btEntrar = (Button)main.findViewById(R.id.btnEntrar);
+        Button btExibirCaronas = (Button)main.findViewById(R.id.btnExibirCaronas);
 
-        btEntrar.setOnClickListener(new View.OnClickListener() {
+        btExibirCaronas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),CaronaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btCriarCarona = (Button)main.findViewById(R.id.btnCriarCarona);
+
+        btCriarCarona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),CaronaCreateActivity.class);
                 startActivity(intent);
             }
         });

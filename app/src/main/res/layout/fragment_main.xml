@@ -12,11 +12,21 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:text="Caronas"
+        android:text="Exibir Caronas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnEntrar"
-        style="@android:style/Widget.Button.Inset"
-        android:layout_centerVertical="true"
+        android:id="@+id/btnExibirCaronas"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp" />
+
+    <Button
+        android:text="Criar Carona"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="113dp"
+        android:id="@+id/btnCriarCarona"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

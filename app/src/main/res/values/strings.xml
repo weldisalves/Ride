@@ -18,4 +18,5 @@
     <string name="title_activity_caronas">Caronas</string>
     <string name="title_activity_carona">CaronaActivity</string>
     <string name="title_activity_carona_description">CaronaDescriptionActivity</string>
+    <string name="title_activity_carona_create">CaronaCreateActivity</string>
 </resources>

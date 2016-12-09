@@ -1,0 +1,14 @@
+[
+        {
+            "condutor_nome": "Leandro",
+            "condutor_avaliacao": 10.0,
+            "veiculo_modelo": "SUV",
+            "veiculo_cor": "branco",
+            "veiculo_placa": "XXT - 0666",
+            "veiculo_imagem": 0,
+            "carona_destino": "Jaguaré",
+            "carona_origem": "CEUNES",
+            "carona_hora_partida": "17:00",
+            "carona_quantidade_de_vagas":2     
+        }
+]

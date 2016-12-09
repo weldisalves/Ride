@@ -1,4 +1,4 @@
-package com.wtech.ride;
+package com.wtech.ride.activity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wtech.ride.R;
 import com.wtech.ride.data.DbHelper;
 
 import com.wtech.ride.data.RideContract.*;

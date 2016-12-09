@@ -1,4 +1,4 @@
-package com.wtech.ride;
+package com.wtech.ride.fragment;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.wtech.ride.R;
 
 import app.mobile.ccomp.ufes.david.lunchbox.Data.Contract;
 

@@ -1,4 +1,4 @@
-package com.wtech.ride;
+package com.wtech.ride.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.wtech.ride.R;
 
 /**
  * Created by weldis on 07/12/16.

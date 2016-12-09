@@ -1,17 +1,17 @@
-package com.wtech.ride;
+package com.wtech.ride.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.wtech.ride.R;
+import com.wtech.ride.model.Carona;
 
-import static java.security.AccessController.getContext;
+import java.util.ArrayList;
 
 /**
  * Created by weldis on 25/11/16.

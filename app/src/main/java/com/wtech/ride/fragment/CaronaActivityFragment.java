@@ -1,4 +1,4 @@
-package com.wtech.ride;
+package com.wtech.ride.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,17 +11,16 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.ViewDragHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.wtech.ride.adapter.CaronaCursorAdapter;
+import com.wtech.ride.R;
+import com.wtech.ride.activity.CaronaDescriptionActivity;
 import com.wtech.ride.data.RideContract;
-
-import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.

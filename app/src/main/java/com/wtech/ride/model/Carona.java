@@ -1,4 +1,4 @@
-package com.wtech.ride;
+package com.wtech.ride.model;
 
 import java.io.Serializable;
 

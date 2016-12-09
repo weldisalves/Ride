@@ -1,98 +1,143 @@
 package com.wtech.ride;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.ViewDragHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.wtech.ride.data.RideContract;
 
 import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CaronaActivityFragment extends Fragment {
+public class CaronaActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    ArrayList<Carona> caronas;
-    CaronaAdapter caronaAdapter;
-    ListView listViewCarona;
+    private CaronaCursorAdapter caronaCursorAdapter;
+    private SwipeRefreshLayout swipe;
+    private ProgressDialog pDialog;
 
-    public CaronaActivityFragment() {
+    private static final int CARONA_LOADER = 0;
 
+    private static final String[] CARONA_COLUMNS = {
+            RideContract.CaronaEntry.TABLE_NAME + "." + RideContract.CaronaEntry._ID,
+            RideContract.CaronaEntry.COLUMN_CARONA_IDCONDUTOR,
+            RideContract.CaronaEntry.COLUMN_CARONA_NUMERO_VAGAS,
+            RideContract.CaronaEntry.COLUMN_CARONA_ID_PONTOPARTIDA,
+            RideContract.CaronaEntry.COLUMN_CARONA_ID_DESTINO,
+            RideContract.CaronaEntry.COLUMN_CARONA_HORA_PARTIDA
+    };
+
+    public final int COLUMN_CARONA_ID = 0;
+    public final int COLUMN_CARONA_IDCONDUTOR = 1;
+    public final int COLUMN_CARONA_NUMERO_VAGAS = 2;
+    public final int COLUMN_CARONA_ID_PONTOPARTIDA = 3;
+    public final int COLUMN_CARONA_ID_DESTINO = 4;
+    public final int COLUMN_CARONA_HORA_PARTIDA = 5;
+
+    public interface Callback{
+        public void onItemSelectes(Uri uri);
+    }
+
+    public CaronaActivityFragment(){}
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View carona = inflater.inflate(R.layout.fragment_carona, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
+        caronaCursorAdapter = new CaronaCursorAdapter(getActivity(),null,0);
+        View rootView = inflater.inflate(R.layout.fragment_carona,container,false);
 
-        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) carona.findViewById(R.id.swipeRefreshCarona);
+        ListView listView = (ListView)rootView.findViewById(R.id.listViewCarona);
+        listView.setAdapter(caronaCursorAdapter);
 
-        caronas = new ArrayList<Carona>();
-        listViewCarona = (ListView)carona.findViewById(R.id.listViewCarona);
-        caronaAdapter = new CaronaAdapter(getContext(),R.layout.item_list_view_carona,caronas);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
-        listViewCarona.setAdapter(caronaAdapter);
-
-        listViewCarona.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Carona c = caronas.get(i); //caronaAdapter.getItem(i);
-                Intent intent = new Intent(getContext(),CaronaDescriptionActivity.class);
-                intent.putExtra("carona",c);
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+                if(cursor != null){
+                    Intent intent = new Intent(getActivity(),CaronaDescriptionActivity.class)
+                            .setData(RideContract.CaronaEntry.buildCaronaUri(
+                                    cursor.getLong(COLUMN_CARONA_ID)
+                            ));
+                    startActivity(intent);
+                }
             }
         });
 
+        swipe = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefreshCarona);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        carregarCaronas();
+                        getContext().getContentResolver().delete(RideContract.CaronaEntry.CONTENT_URI,null,null);
+                        new DownloadData(getContext()).execute();
                         swipe.setRefreshing(false);
-                    }
-                }, 500);
+                    };
+                },0);
+
             }
         });
 
-        return carona;
+        return rootView;
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
-    void carregarCaronas(){
-        caronas.clear();
+        CursorLoader cursorLoader = new CursorLoader(getActivity(),
+                RideContract.CaronaEntry.CONTENT_URI,
+                CARONA_COLUMNS,
+                null,
+                null,
+                null);
 
-        for(int i = 0; i< 10;i++){
-            Carona carona = new Carona();
+        return cursorLoader;
+    }
 
-            //preenchendo os valores especificos da classe carona
-            carona.setHoraDaPartida(i*12+"-"+i*60+"-"+i*60);
-            carona.setIdCondutor(i*3);
-            if(i%3==0)carona.setIdOrigem(i*7);
-            carona.setIdDestino(i*9);
-            carona.setNumeroDeVagas(i+1);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        caronaCursorAdapter.swapCursor(cursor);
 
-            String listaDePassageiros [] = {String.valueOf(i*11), String.valueOf(i*13),String.valueOf(i*17), String.valueOf(i*19)};
-            carona.setListaDePassageiros(listaDePassageiros);
+    }
 
-            String pontosDeEmbarque[] = {String.valueOf(i*23), String.valueOf(i*29),String.valueOf(i*31), String.valueOf(i*37)};
-            carona.setPontosDeEmbarque(pontosDeEmbarque);
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        caronaCursorAdapter.swapCursor(null);
+    }
 
-            caronas.add(carona);
-        }
+    void onDataChanged(){
+        updateData();
+        getLoaderManager().restartLoader(CARONA_LOADER,null,this);
+    }
 
-        caronaAdapter = new CaronaAdapter(getContext(),R.layout.item_list_view_carona,caronas);
-        listViewCarona.setAdapter(caronaAdapter);
+    void updateData(){
+        DownloadData fetchDataTask = new DownloadData(getActivity());
+        fetchDataTask.execute();
 
+        getLoaderManager().restartLoader(CARONA_LOADER,null,this);
     }
 }

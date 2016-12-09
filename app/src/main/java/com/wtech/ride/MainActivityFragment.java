@@ -12,7 +12,8 @@ import android.widget.Button;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
-
+    Button btExibirCaronas;
+    Button btCriarCarona;
     public MainActivityFragment() {
     }
 
@@ -21,7 +22,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View main = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button btExibirCaronas = (Button)main.findViewById(R.id.btnExibirCaronas);
+        btExibirCaronas = (Button)main.findViewById(R.id.btnExibirCaronas);
 
         btExibirCaronas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,7 +32,7 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        Button btCriarCarona = (Button)main.findViewById(R.id.btnCriarCarona);
+        btCriarCarona = (Button)main.findViewById(R.id.btnCriarCarona);
 
         btCriarCarona.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,7 @@ package com.wtech.ride.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.wtech.ride.data.*;
+
 import com.wtech.ride.data.RideContract.*;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -18,13 +18,13 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        final String SQL_CREATE_PESSOA_TABLE = "CREATE TABLE "+ PessoaEntry.TABLE_NAME +" ("+
-                PessoaEntry._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                PessoaEntry.COLUMN_PESSOA_NAME +" TEXT NOT NULL, " +
-                PessoaEntry.COLUMN_PESSOA_SOBRENOME +" TEXT NOT NULL, " +
-                PessoaEntry.COLUMN_PESSOA_DATA_NASCIMENTO + " INTEGER NOT NULL, " +
-                PessoaEntry.COLUMN_PESSOA_USERNAME +" TEXT NOT NULL, "+
-                PessoaEntry.COLUMN_PESSOA_PASSWORD +" TEXT NOT NULL);";
+        final String SQL_CREATE_PESSOA_TABLE = "CREATE TABLE "+ UsuarioEntry.TABLE_NAME +" ("+
+                UsuarioEntry._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                UsuarioEntry.COLUMN_USUARIO_NAME +" TEXT NOT NULL, " +
+                UsuarioEntry.COLUMN_USUARIO_SOBRENOME +" TEXT NOT NULL, " +
+                UsuarioEntry.COLUMN_USUARIO_DATA_NASCIMENTO + " INTEGER NOT NULL, " +
+                UsuarioEntry.COLUMN_USUARIO_USERNAME +" TEXT NOT NULL, "+
+                UsuarioEntry.COLUMN_USUARIO_PASSWORD +" TEXT NOT NULL);";
 
         final String SQL_CREATE_PONTOVIRTUAL_TABLE = "CREATE TABLE " + PontoVirtualEntry.TABLE_NAME + " ("+
                 PontoVirtualEntry._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
@@ -57,7 +57,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + PessoaEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + UsuarioEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CaronaEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + VeiculoEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PontoVirtualEntry.TABLE_NAME);

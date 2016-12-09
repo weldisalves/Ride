@@ -1,6 +1,7 @@
 package com.wtech.ride.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -8,114 +9,75 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
+import java.sql.RowId;
+
 /**
- * Created by Guilherme on 05/12/2016.
+ * Created by Guilherme on 09/12/2016.
  */
 
-public class RideProvider extends ContentProvider {
+public class RideProvider extends ContentProvider{
 
-    private static final UriMatcher sUriMatcher = buildUriMatcher();
-    private DbHelper mOpenHelper;
+    private UriMatcher uriMatcher = buildUriMatcher();
+    private DbHelper rideDb;
 
-    static final int CARONA = 100;
-    static final int PESSOA = 200;
-    static final int VEICULO = 300;
-    static final int PONTOVIRTUAL = 400;
+    public static final int CARONA = 1;
+    public static final int CARONA_WITH_ID = 2;
 
-
-    static UriMatcher buildUriMatcher(){
+    public static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = RideContract.CONTENT_AUTHORITY;
-
         matcher.addURI(authority, RideContract.PATH_CARONA, CARONA);
-        matcher.addURI(authority, RideContract.PATH_USUARIO, PESSOA);
-        matcher.addURI(authority, RideContract.PATH_PONTOVIRTUAL, PONTOVIRTUAL);
-        matcher.addURI(authority, RideContract.PATH_VEICULO, VEICULO);
-
+        matcher.addURI(authority, RideContract.PATH_CARONA + "/#", CARONA_WITH_ID);
         return matcher;
     }
 
     @Override
     public boolean onCreate() {
-        mOpenHelper = new DbHelper(getContext());
+        rideDb = new DbHelper(getContext());
         return true;
     }
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-                        String sortOrder) {
-
-        Cursor retCursor;
-        switch (sUriMatcher.match(uri)){
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        Cursor cursor;
+        switch (uriMatcher.match((uri))) {
             case CARONA: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
+                cursor = rideDb.getReadableDatabase().query(
                         RideContract.CaronaEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
                         null,
                         null,
-                        sortOrder
-                );
-                break;
+                        sortOrder);
+                return cursor;
             }
-            case PONTOVIRTUAL: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
-                        RideContract.PontoVirtualEntry.TABLE_NAME,
+            case CARONA_WITH_ID: {
+                cursor = rideDb.getReadableDatabase().query(
+                        RideContract.CaronaEntry.TABLE_NAME,
                         projection,
-                        selection,
-                        selectionArgs,
+                        RideContract.CaronaEntry._ID + " = ?",
+                        new String[]{String.valueOf(ContentUris.parseId(uri))},
                         null,
                         null,
-                        sortOrder
-                );
-                break;
-            }
-            case VEICULO: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
-                        RideContract.VeiculoEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
-                break;
-            }
-            case PESSOA: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
-                        RideContract.UsuarioEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
-                break;
+                        sortOrder);
+                return cursor;
             }
             default:
-                throw new UnsupportedOperationException("URI desconhecida: " +uri);
+                throw new UnsupportedOperationException("URI desconhecida: " + uri);
         }
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        return retCursor;
     }
 
     @Nullable
     @Override
     public String getType(Uri uri) {
-        final int match = sUriMatcher.match(uri);
-        switch(match) {
+        final int match =  uriMatcher.match(uri);
+        switch (match){
             case CARONA:
                 return RideContract.CaronaEntry.CONTENT_TYPE;
-            case PESSOA:
-                return RideContract.UsuarioEntry.CONTENT_TYPE;
-            case VEICULO:
-                return RideContract.VeiculoEntry.CONTENT_TYPE;
-            case PONTOVIRTUAL:
-                return RideContract.PontoVirtualEntry.CONTENT_TYPE;
+            case CARONA_WITH_ID:
+                return RideContract.CaronaEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("URI desconhecida: " + uri);
         }
@@ -124,108 +86,113 @@ public class RideProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        final int match = sUriMatcher.match(uri);
+        final SQLiteDatabase db = rideDb.getWritableDatabase();
         Uri returnUri;
-        switch (match) {
+        switch (uriMatcher.match(uri)){
             case CARONA:{
                 long _id = db.insert(RideContract.CaronaEntry.TABLE_NAME, null, values);
-                if (_id > 0)
+                if(_id > 0){
                     returnUri = RideContract.CaronaEntry.buildCaronaUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case PESSOA:{
-                long _id = db.insert(RideContract.UsuarioEntry.TABLE_NAME, null, values);
-                if (_id > 0)
-                    returnUri = RideContract.UsuarioEntry.buildPessoaUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case VEICULO:{
-                long _id = db.insert(RideContract.VeiculoEntry.TABLE_NAME, null, values);
-                if (_id > 0)
-                    returnUri = RideContract.VeiculoEntry.buildVeiculoUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case PONTOVIRTUAL:{
-                long _id = db.insert(RideContract.PontoVirtualEntry.TABLE_NAME, null, values);
-                if (_id > 0)
-                    returnUri = RideContract.PontoVirtualEntry.buildPontoVirtualUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                } else{
+                    throw new android.database.SQLException("Insercao falhou: " + uri);
+                }
                 break;
             }
             default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                throw new UnsupportedOperationException("URI desconhecida: " + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
+        getContext().getContentResolver().notifyChange(uri,null);
+        db.close();
         return returnUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        final int match = sUriMatcher.match(uri);
-
-        int rowsDeleted;
-        // this makes delete all rows return the number of rows deleted
-        if ( null == selection ) selection = "1";
-        switch (match) {
+        final SQLiteDatabase db = rideDb.getWritableDatabase();
+        final int match = uriMatcher.match(uri);
+        int numDeleted;
+        switch (match){
             case CARONA:
-                rowsDeleted = db.delete(
-                        RideContract.CaronaEntry.TABLE_NAME, selection, selectionArgs);
+                numDeleted = db.delete(RideContract.CaronaEntry.TABLE_NAME, selection, selectionArgs);
+                db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" +
+                        RideContract.CaronaEntry.TABLE_NAME + "'");
                 break;
-            case PESSOA:
-                rowsDeleted = db.delete(
-                        RideContract.UsuarioEntry.TABLE_NAME, selection, selectionArgs);
-                break;
-            case VEICULO:
-                rowsDeleted = db.delete(
-                        RideContract.VeiculoEntry.TABLE_NAME, selection, selectionArgs);
-                break;
-            case PONTOVIRTUAL:
-                rowsDeleted = db.delete(
-                        RideContract.PontoVirtualEntry.TABLE_NAME, selection, selectionArgs);
+            case CARONA_WITH_ID:
+                numDeleted = db.delete(
+                        RideContract.CaronaEntry.TABLE_NAME,
+                        RideContract.CaronaEntry._ID + " = ?",
+                        new String[]{String.valueOf(ContentUris.parseId(uri))});
+                db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" +
+                        RideContract.CaronaEntry.TABLE_NAME + "'");
                 break;
             default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                throw new UnsupportedOperationException("URI desconhecida: " + uri);
         }
-        if (rowsDeleted != 0) {
-            getContext().getContentResolver().notifyChange(uri, null);
+        return numDeleted;
+    }
+
+    public int bulkInsert(Uri uri, ContentValues[] values){
+        final SQLiteDatabase db = rideDb.getWritableDatabase();
+        final int match = uriMatcher.match(uri);
+        switch (match){
+            case CARONA:
+                db.beginTransaction();
+                int numInserted = 0;
+                try{
+                    for(ContentValues value : values){
+                        if(value == null){
+                            throw new IllegalArgumentException("Cannot have null content values");
+                        }
+                        long _id = -1;
+                        _id = db.insert(RideContract.CaronaEntry.TABLE_NAME, null, value);
+                        if(_id != -1){
+                            numInserted++;
+                        }
+                    }
+                    if(numInserted > 0){
+                        db.setTransactionSuccessful();
+                    }
+                } finally {
+                    db.endTransaction();
+                }
+                if(numInserted > 0){
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+                return numInserted;
+            default:
+                return super.bulkInsert(uri, values);
         }
-        return rowsDeleted;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        final int match = sUriMatcher.match(uri);
-        int rowsUpdated;
-
-        switch (match) {
-            case CARONA:
-                rowsUpdated = db.update(RideContract.CaronaEntry.TABLE_NAME, values, selection, selectionArgs);
-                break;
-            case PESSOA:
-                rowsUpdated = db.update(RideContract.UsuarioEntry.TABLE_NAME, values, selection, selectionArgs);
-                break;
-            case VEICULO:
-                rowsUpdated = db.update(RideContract.VeiculoEntry.TABLE_NAME, values, selection, selectionArgs);
-                break;
-            case PONTOVIRTUAL:
-                rowsUpdated = db.update(RideContract.PontoVirtualEntry.TABLE_NAME, values, selection, selectionArgs);
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        final SQLiteDatabase db = rideDb.getWritableDatabase();
+        int numUpdated = 0;
+        if(values == null){
+            throw new IllegalArgumentException("Cannot have null content values");
         }
-        if (rowsUpdated != 0) {
+        switch (uriMatcher.match(uri)){
+            case CARONA:{
+                numUpdated = db.update(RideContract.CaronaEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            }
+            case CARONA_WITH_ID:{
+                numUpdated = db.update(RideContract.CaronaEntry.TABLE_NAME,
+                        values,
+                        RideContract.CaronaEntry._ID + " = ?",
+                        new String[] {String.valueOf(ContentUris.parseId(uri))});
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("URI desconhecida: " + uri);
+        }
+        if (numUpdated > 0){
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        return rowsUpdated;
+
+        return numUpdated;
     }
 }
